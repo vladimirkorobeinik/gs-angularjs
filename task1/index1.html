@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Task 1</title>
+  <meta name="description" content="Getting started AngularJS">
+  <meta name="author" content="uladzimir.karabeinik">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+  <script>
+  (function() {
+  	var module = angular.module("task1Module", []);
+
+  	module.controller("parentCntrl1", parentController1);
+  	parentController1.$inject = ['$rootScope', '$scope'];
+  	function parentController1($rootScope, $scope) {
+  		$scope.salary = $rootScope.salary;
+  	}
+
+  	module.controller("childCntrl1", childController1);
+  	childController1.$inject = ['$rootScope', '$scope'];
+  	function childController1($rootScope, $scope) {
+  		$scope.salary = $rootScope.salary;
+  	}
+
+  	module.controller("childCntrl2", childController2);
+  	childController2.$inject = ['$rootScope', '$scope'];
+  	function childController2($rootScope, $scope) {
+  		$scope.salary = $rootScope.salary;
+  	}
+
+  	module.controller("parentCntrl2", parentController2);
+  	parentController2.$inject = ['$rootScope', '$scope'];
+  	function parentController2($rootScope, $scope) {
+  		$scope.salary = $rootScope.salary;
+  	}
+
+  	module.controller("noInheritanceCntrl", noInheritanceController);
+  	noInheritanceController.$inject = [];
+  	function noInheritanceController() {
+  	};
+  })();
+  </script>
+</head>
+<body ng-app="task1Module" ng-init="salary={amount: 1000}">
+  <div ng-controller="parentCntrl1">
+  	<span>Parent 1:</span>
+    <input type="text" ng-model="salary.amount">
+    <span>{{salary.amount}}</span>
+    <div ng-controller="childCntrl1">
+    	<span>Child 1:</span>
+    	<input type="text" ng-model="salary.amount">
+    	<span>{{salary.amount}}</span>
+    </div>
+    <div ng-controller="childCntrl2">
+    	<span>Child 2:</span>
+    	<input type="text" ng-model="salary.amount">
+    	<span>{{salary.amount}}</span>
+    </div>
+  </div>
+
+  <div ng-controller="parentCntrl2">
+  	<span>Parent 2:</span>
+	<input type="text" ng-model="salary.amount">
+	<span>{{salary.amount}}</span>
+  </div>
+
+  <div ng-controller="noInheritanceCntrl as noInheritance"></div>
+</body>
+</html>
